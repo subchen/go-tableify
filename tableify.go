@@ -65,6 +65,12 @@ func (t *Table) AddRow(data ...interface{}) {
 	t.rows = append(t.rows, row)
 }
 
+func (t *Table) AddRowList(rows ...[]string) {
+	for _, row := range rows {
+		t.AddRow(row...)	
+	}
+}
+
 func (t *Table) Print() {
 	totalWidth := 0
 	format := ""
