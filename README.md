@@ -28,8 +28,8 @@ func main() {
 	t := tableify.New()
 	t.SetHeaders("NAME", "FILES", "UPDATED")
 	t.SetWidths(10, 0, 0) // optional
-    t.EmptyText = "no data in table"
-    
+	t.EmptyText = "no data in table"
+
 	t.AddRow("yum-repo", 45, "2018-01-06T07:45:22Z")
 	t.AddRow("deb-repo", 12, "2018-01-06T08:05:09Z")
 
