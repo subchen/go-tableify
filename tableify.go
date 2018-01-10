@@ -17,7 +17,7 @@ type (
 		SplitLine bool
 		EmptyText string
 
-		FormatFunc func(v interface{}) string
+		FormatFunc func(header string, value interface{}) string
 	}
 )
 
@@ -50,7 +50,7 @@ func (t *Table) AddRow(data ...interface{}) {
 	// format as []string
 	row := make([]string, len(t.headers))
 	for i, v := range data {
-		row[i] = t.FormatFunc(v)
+		row[i] = t.FormatFunc(t.headers[i], v)
 
 		// calc real width
 		if len(row[i]) > t.realwidths[i] {
@@ -67,7 +67,7 @@ func (t *Table) AddRow(data ...interface{}) {
 
 func (t *Table) AddRowList(rows ...[]string) {
 	for _, row := range rows {
-		t.AddRow(row...)	
+		t.AddRow(asInterfaces(row)...)
 	}
 }
 
@@ -112,7 +112,7 @@ func (t *Table) Print() {
 	}
 }
 
-func format(value interface{}) string {
+func format(header string, value interface{}) string {
 	if value == nil {
 		return ""
 	}
