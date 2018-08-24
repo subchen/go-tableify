@@ -78,7 +78,9 @@ func (t *Table) SetHeadersFromStruct(obj interface{}) {
 					width = 0
 				} else {
 					width, err = strconv.Atoi(parts[1])
-					panic(fmt.Errorf("width is not an integer: %s", parts[1], err.Error()))
+					if err != nil{
+						panic(fmt.Errorf("width is not an integer: %s", parts[1], err.Error()))
+					}
 				}
 
 				// 2: format
